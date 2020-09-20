@@ -1,0 +1,11 @@
+<form [formGroup]="registerForm">
+  <div>
+    <input type="text" formControlName="firstName" required>
+  </div>
+  <div>
+    <input type="text" formControlName="lastName" required>
+  </div>
+  <div>
+    <button [disabled]="!registerForm.valid">Register</button>
+  </div>
+</form>
