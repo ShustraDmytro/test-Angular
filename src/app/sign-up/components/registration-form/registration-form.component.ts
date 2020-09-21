@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { phoneValidator } from './validators/phone';
+import { emailValidator } from './validators/email';
 
 @Component({
   selector: 'app-registration-form',
@@ -8,8 +10,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegistrationFormComponent implements OnInit {
   registerForm = this.fb.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
+    name: ['', Validators.required],
+    userName: ['', Validators.required],
+    phone: ['', [Validators.required, phoneValidator]],
+    email: ['', [Validators.required, emailValidator]],
+    address: this.fb.group({
+      street: [''],
+      suite: [''],
+      city: [''],
+      zipcode: [''],
+    }),
   });
   loading: boolean;
   submitted: boolean;

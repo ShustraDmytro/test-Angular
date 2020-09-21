@@ -1,0 +1,12 @@
+.container {
+  height: 100vh;
+
+  @media (min-width: 768px) {
+    height: 80vh;
+  }
+}
+.close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}

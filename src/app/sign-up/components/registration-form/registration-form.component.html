@@ -1,0 +1,99 @@
+<form [formGroup]="registerForm" class="p-grid p-shadow-13 p-px-3 p-pb-3">
+  <div class="p-col-12 p-md-6">
+    <h3 class="p-text-center">Main Info</h3>
+    <div class="p-float-label p-mb-4 p-fluid">
+      <input
+        id="name"
+        class="p-inputtext-lg"
+        pInputText
+        type="text"
+        formControlName="name"
+      />
+      <label for="name">Name*</label>
+    </div>
+    <div class="p-float-label p-mb-4 p-fluid">
+      <input
+        id="userName"
+        class="p-inputtext-lg"
+        pInputText
+        type="text"
+        formControlName="userName"
+      />
+      <label for="userName">User Name*</label>
+    </div>
+    <div class="p-float-label p-mb-4 p-fluid">
+      <input
+        id="email"
+        class="p-inputtext-lg"
+        pInputText
+        type="text"
+        formControlName="email"
+      />
+      <label for="email">Email*</label>
+    </div>
+    <div class="p-float-label p-fluid">
+      <p-inputMask
+        class="p-inputtext-lg"
+        id="phone"
+        mask="9999999999"
+        type="text"
+        formControlName="phone"
+        characterPattern="[0-9]"
+      ></p-inputMask>
+      <label for="phone">Phone*</label>
+    </div>
+  </div>
+  <div class="p-col-12 p-md-6" formGroupName="address">
+    <h3 class="p-text-center">Address</h3>
+    <div class="p-float-label p-mb-4 p-fluid">
+      <input
+        id="street"
+        class="p-inputtext-lg"
+        pInputText
+        type="text"
+        formControlName="street"
+      />
+      <label for="street">Street</label>
+    </div>
+    <div class="p-float-label p-mb-4 p-fluid">
+      <input
+        id="suite"
+        class="p-inputtext-lg"
+        pInputText
+        type="text"
+        formControlName="suite"
+      />
+      <label for="suite">Suite</label>
+    </div>
+    <div class="p-float-label p-mb-4 p-fluid">
+      <input
+        id="city"
+        class="p-inputtext-lg"
+        pInputText
+        type="text"
+        formControlName="city"
+      />
+      <label for="city">City</label>
+    </div>
+    <div class="p-float-label p-fluid">
+      <input
+        id="zipcode"
+        class="p-inputtext-lg"
+        pInputText
+        type="text"
+        formControlName="zipcode"
+      />
+      <label for="zipcode">Zipcode</label>
+    </div>
+  </div>
+
+  <div class="p-col-12 p-fluid">
+    <button
+      pButton
+      type="button"
+      [disabled]="!registerForm.valid"
+      label="Sign Up"
+      class="p-button-lg"
+    ></button>
+  </div>
+</form>
