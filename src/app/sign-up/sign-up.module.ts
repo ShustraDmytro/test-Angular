@@ -9,6 +9,7 @@ import { ButtonModule } from 'primeng/button';
 import { CloseButtonComponent } from './components/close-button/close-button.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
+import { Registration } from './services/registration.service';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,9 @@ import { RegistrationFormComponent } from './components/registration-form/regist
     InputMaskModule,
     InputTextModule,
     ButtonModule,
+  ],
+  providers: [
+    Registration
   ],
   exports: [SignUpComponent],
 })

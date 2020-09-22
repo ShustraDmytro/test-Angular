@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-close-button',
@@ -7,11 +8,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./close-button.component.scss'],
 })
 export class CloseButtonComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private auth: AuthService) {}
 
   ngOnInit(): void {}
 
-  click(): void {
+  public click(): void {
     this.router.navigate(['/']);
+  }
+
+  get isUserExist(): boolean {
+    return this.auth.isAuthenticated();
   }
 }

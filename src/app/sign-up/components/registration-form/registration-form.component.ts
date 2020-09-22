@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { phoneValidator } from './validators/phone';
 import { emailValidator } from './validators/email';
+import { Registration } from '../../services/registration.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-registration-form',
@@ -9,37 +11,42 @@ import { emailValidator } from './validators/email';
   styleUrls: ['./registration-form.component.scss'],
 })
 export class RegistrationFormComponent implements OnInit {
-  registerForm = this.fb.group({
-    name: ['', Validators.required],
-    userName: ['', Validators.required],
-    phone: ['', [Validators.required, phoneValidator]],
-    email: ['', [Validators.required, emailValidator]],
-    address: this.fb.group({
-      street: [''],
-      suite: [''],
-      city: [''],
-      zipcode: [''],
-    }),
-  });
-  loading: boolean;
-  submitted: boolean;
-
-  constructor(private fb: FormBuilder) {}
+  public pending: boolean;
+  public registerForm: FormGroup;
+  constructor(
+    private fb: FormBuilder,
+    private registration: Registration,
+    private auth: AuthService
+  ) {
+    this.pending = false;
+  }
 
   ngOnInit(): void {
-    this.registerForm.valueChanges.subscribe((value) => {
-      console.log(value);
+    this.registerForm = this.fb.group({
+      name: ['', Validators.required],
+      userName: ['', Validators.required],
+      phone: ['', [Validators.required, phoneValidator]],
+      email: ['', [Validators.required, emailValidator]],
+      address: this.fb.group({
+        street: [''],
+        suite: [''],
+        city: [''],
+        zipcode: [''],
+      }),
     });
   }
 
-  // convenience getter for easy access to form fields
-  get controls(): any {
-    return this.registerForm.controls;
-  }
+  public onSubmit(): void {
+    this.pending = true;
 
-  onSubmit(): void {
-    this.submitted = true;
-    this.loading = true;
-    console.log('yo');
+    this.registration.createUser(this.registerForm.value).subscribe(
+      (user) => {
+        this.auth.user = user;
+      },
+      (error) => console.error('There was an error!', error),
+      () => {
+        this.pending = false;
+      }
+    );
   }
 }

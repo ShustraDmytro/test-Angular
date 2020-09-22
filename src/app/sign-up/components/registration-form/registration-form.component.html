@@ -1,4 +1,4 @@
-<form [formGroup]="registerForm" class="p-grid p-shadow-13 p-px-3 p-pb-3">
+<form [formGroup]="registerForm" class="p-grid p-shadow-13 p-px-3 p-pb-3 form">
   <div class="p-col-12 p-md-6">
     <h3 class="p-text-center">Main Info</h3>
     <div class="p-float-label p-mb-4 p-fluid">
@@ -88,12 +88,18 @@
   </div>
 
   <div class="p-col-12 p-fluid">
-    <button
-      pButton
-      type="button"
-      [disabled]="!registerForm.valid"
-      label="Sign Up"
-      class="p-button-lg"
-    ></button>
+    <div *ngIf="pending; else elseBlock" class="p-d-flex p-jc-center">
+      <i class="pi pi-spin pi-spinner icon"></i>
+    </div>
+    <ng-template #elseBlock>
+      <button
+        pButton
+        type="button"
+        [disabled]="!registerForm.valid"
+        label="Sign Up"
+        class="p-button-lg"
+        (click)="onSubmit()"
+      ></button
+    ></ng-template>
   </div>
 </form>

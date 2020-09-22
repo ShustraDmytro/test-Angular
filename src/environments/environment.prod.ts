@@ -1,3 +1,8 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: 'https://jsonplaceholder.typicode.com',
+  endpoints: {
+    users: '/users',
+    todos: '/todos'
+  }
 };
